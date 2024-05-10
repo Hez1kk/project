@@ -13,10 +13,10 @@
         <button type="submit">Добавить</button>
     </form>
     <hr>
-    <h2>Список элементов:</h2>
+    <h2>Список должников:</h2>
     <ul>
-        {% for item in items %}
-            <li>{{ item.name }}</li>
+        {% for name in names %}
+            <li>{{ name }}</li>
         {% endfor %}
     </ul>
 </body>
