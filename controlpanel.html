@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Panel</title>
+</head>
+<body>
+    <h1>Control Panel</h1>
+    <form method="POST" action="{{ url_for('add_value') }}">
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="value" placeholder="Value">
+        <button type="submit">Добавить</button>
+    </form>
+    <hr>
+    <h2>Список элементов:</h2>
+    <ul>
+        {% for item in items %}
+            <li>{{ item.name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
