@@ -7,7 +7,7 @@ app.secret_key = '123'
 
 db = SQLAlchemy(app)
 
-class Item(db.Model):
+class Name(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
 
@@ -19,8 +19,8 @@ class MyValue(db.Model):
 
 @app.route('/')
 def index():
-    items = Item.query.all()
-    return render_template('index.html', items=items)
+    name = Name.query.all()
+    return render_template('index.html', names=name)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -33,12 +33,12 @@ def login():
 def controlpanel():
     if request.method == 'POST':
         name = request.form['name']
-        new_item = Item(name=name)
-        db.session.add(new_item)
+        new_name = name(name=name)
+        db.session.add(new_name)
         db.session.commit()
         return redirect(url_for('controlpanel'))
-    items = Item.query.all()
-    return render_template('controlpanel.html', items=items)
+    names = Name.query.all()
+    return render_template('controlpanel.html', names=names)
 
 @app.route('/add_value', methods=['POST'])
 def add_value():
