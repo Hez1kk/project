@@ -3,21 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control Panel</title>
+    <title>Панель Управления</title>
 </head>
 <body>
-    <h1>Control Panel</h1>
-    <form method="POST" action="{{ url_for('add_value') }}">
-        <input type="text" name="name" placeholder="Name">
-        <input type="text" name="value" placeholder="Value">
-        <button type="submit">Добавить</button>
+    <h1>Панель Управления</h1>
+    <form method="POST" action="{{ url_for('controlpanel') }}">
+        <label for="username">Имя:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">Добавить пользователя</button>
     </form>
+
     <hr>
+
     <h2>Список должников:</h2>
-    <ul>
-        {% for name in names %}
-            <li>{{ name }}</li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Долг</th>
+                <th>Обновить долг</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.debts }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('update_debt') }}">
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <input type="text" name="new_debt_amount" placeholder="Новый долг" required>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
